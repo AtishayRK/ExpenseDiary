@@ -1,0 +1,29 @@
+<div class="card">
+    <div class="card-header">
+      <h1>WHAT U SPENT TODAY</h1>
+    </div>
+    <div class="card-body">
+     <form [formGroup]="myGroup">
+         <div>
+         <label for="">ITEM INFO</label>
+         <input type ="text" formControlName="item" [(ngModel)]="item"name ="item" placeholder="Enter item info" required>
+         <p *ngIf="myGroup.controls.item.errors?.required">required</p>
+         </div>
+         <div >
+          <label for="">AMOUNT</label>
+          <input type="number" formControlName="amt" name="amt" [(ngModel)]="amt" placeholder="enter amount" required/>
+            <p *ngIf="myGroup.controls.amt.errors?.min">At least 1 rupee</p>
+            <p *ngIf="check">hello</p>
+        </div>
+                <button type="button" (click)="saveItem()" class ="btn btn-primary float-right">ADD</button>
+        </form>
+    </div>
+  </div>
+  <div class="container">
+    <h3>add something u forgot to add on the other day?????? Click here</h3>
+    <button type="button" routerLink="/insert-item" routerLinkActive="Active" class="btn btn-primary">Insert</button>
+  </div>
+  <div class="container">
+    <h3>get ur expenditure details?????? Click here</h3>
+    <button type="button" routerLink="/getitem" routerLinkActive="Active" class="btn btn-primary">GetData</button>
+  </div>

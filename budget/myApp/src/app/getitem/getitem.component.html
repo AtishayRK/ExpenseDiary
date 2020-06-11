@@ -1,0 +1,48 @@
+<div class="container">
+<div id="from">
+  <h3>From</h3>
+<ngb-datepicker #dp [(ngModel)]="modelfrom"></ngb-datepicker>
+
+<hr/>
+
+  <b>{{ modelfrom.day }}/{{ modelfrom.month }}/{{ modelfrom.year }}</b>
+</div>
+<div id="to">
+    <h3>To</h3>
+  <ngb-datepicker #dp [(ngModel)]="modelto"></ngb-datepicker>
+  
+  <hr/>
+  
+    <b>{{ modelto.day }}/{{ modelto.month }}/{{ modelto.year }}</b>
+  </div>
+  
+      <button id="button" type="button" (click)="getdata()" class="btn btn-primary">get data</button>
+</div>
+<div class="container" *ngIf="show">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">ITEM INFO</th>
+      <th scope="col">DATE</th>
+      <th scope="col">AMOUNT</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let l of sorteddata; index as i" >
+      <th scope="row">{{ i + 1 }}</th>
+      
+      <td>{{l.item }}</td>
+      <td>{{l.date}}</td>
+      <td>{{l.amt}}</td>
+      
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td><h3>Total =</h3></td>
+      <td><h3>{{total}}</h3></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
