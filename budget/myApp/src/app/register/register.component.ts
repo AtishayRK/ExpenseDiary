@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
-  name : String
+  name : string
   password : String
 
   constructor(private auth:AuthserviceService,private router : Router) { }
@@ -25,7 +25,8 @@ registerUser(){
     res=>{
        console.log(res)
        localStorage.setItem('token',res.token)
-       this.router.navigate(['/item']);
+       this.router.navigate(['/profiles']);
+       localStorage.setItem('user',this.name)
     },
     err=>{
       console.log("errr in save");

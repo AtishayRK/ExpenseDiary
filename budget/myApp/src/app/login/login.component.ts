@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  name : String
+  name : string
   password : String
 
   constructor(private auth:AuthserviceService,private router : Router) { }
@@ -25,7 +25,8 @@ loginUser(){
     res=>{
        console.log(res)
        localStorage.setItem('token',res.token)
-       this.router.navigate(['/item']);
+       this.router.navigate(['/profiles']);
+       localStorage.setItem('user',this.name);
     },
     err=>{
       console.log(err);

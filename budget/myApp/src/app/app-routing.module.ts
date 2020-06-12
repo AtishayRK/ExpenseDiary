@@ -6,17 +6,23 @@ import { ItemComponent } from './item/item.component';
 import { AuthguardService } from './authguard.service';
 import { InsertItemComponent } from './insert-item/insert-item.component';
 import { GetitemComponent } from './getitem/getitem.component';
+import { ProfilesComponent } from './profiles/profiles.component';
 
 
 const routes: Routes = [
   {
     path:'',
-    redirectTo :'/item',
+    redirectTo :'/profiles',
     pathMatch : 'full'
   },
   {
     path : 'login',
     component : LoginComponent
+  },
+  {
+    path : 'profiles',
+    component : ProfilesComponent,
+    canActivate : [AuthguardService]
   },
   {
     path : 'register',
