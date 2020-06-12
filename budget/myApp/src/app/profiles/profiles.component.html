@@ -27,9 +27,6 @@
   
    
   <pre>{{ closeResult }}</pre>
-  <button type="button" class="btn btn-success" id="ins"routerLink="/insert-item" routerLinkActive="Active">Insert</button>
-    <button type="button" routerLink="/getitem" routerLinkActive="Active" class="btn btn-primary">GetData</button>
-  <hr>
   <ul class="list-group" *ngFor="let i of profilename">
     <li class="list-group-item">{{i}}</li>
     <button type="button" class="btn btn-danger" id="del" (click)="delete(i)">Delete</button>
