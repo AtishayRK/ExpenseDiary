@@ -10,18 +10,28 @@
         <div class="form-group">
           <label for="nameOfprofile">Profile Name</label>
           <div class="input-group">
-            <input id="nameOfprofile " class="form-control" placeholder="Add Profile" name="nameOfprofile" type="text" required >
+            <input id="nameOfprofile " class="form-control" [(ngModel)]="nameOfprofile" placeholder="Add Profile" name="nameOfprofile" type="text" required >
           </div>
         </div>
       </form>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Added new Profile')">Add</button>
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Added new profile')">Add</button>
     </div>
   </ng-template>
   
-  <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button>
-  
+  <button class="btn btn-lg btn-outline-primary" id="prof" (click)="open(content)">Add new profile</button>
+ 
   <hr>
   
+  
+   
   <pre>{{ closeResult }}</pre>
+  <button type="button" class="btn btn-success" id="ins"routerLink="/insert-item" routerLinkActive="Active">Insert</button>
+    <button type="button" routerLink="/getitem" routerLinkActive="Active" class="btn btn-primary">GetData</button>
+  <hr>
+  <ul class="list-group" *ngFor="let i of profilename">
+    <li class="list-group-item">{{i}}</li>
+    <button type="button" class="btn btn-danger" id="del" (click)="delete(i)">Delete</button>
+    </ul>
+    

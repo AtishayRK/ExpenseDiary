@@ -1,3 +1,10 @@
+
+  <label for="">Choose a profile</label>
+<select name="profile" [(ngModel)]="selected" id="profile">
+
+<option *ngFor="let i of profilename" [ngValue]="i">{{i}}</option>
+</select>
+<hr>
 <div class="container">
 <div id="from">
   <h3>From</h3>

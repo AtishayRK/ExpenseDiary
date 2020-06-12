@@ -4,6 +4,15 @@
     </div>
     <div class="card-body">
      <form class="form-control">
+       
+      <div class="form-group">
+        <label for="">Choose a profile</label>
+  <select name="profile" [(ngModel)]="selected" id="profile">
+     
+    <option *ngFor="let i of profilename" [ngValue]="i">{{i}}</option>
+    
+  </select>
+      </div>
          <div class= "form-group">
          <label for="">ITEM INFO</label>
          <input type ="text" [(ngModel)] ="item" name ="item" placeholder="Enter item info" required class="form-control">
@@ -18,10 +27,6 @@
                 <button type="button" (click)="saveItem()" class ="btn btn-primary float-right">ADD</button>
         </form>
     </div>
-  </div>
-  <div class="container">
-    <h3>u want to add something u spent today?????? Click here</h3>
-    <button type="button" routerLink="/item" routerLinkActive="Active" class="btn btn-primary">Insert</button>
   </div>
   <div class="container">
     <h3>get ur expenditure details?????? Click here</h3>

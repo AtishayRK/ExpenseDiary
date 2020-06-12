@@ -10,15 +10,9 @@ export class GetitemComponent implements OnInit {
 
    modelfrom : NgbDate
    modelto :NgbDate
-  //  data={
-  //   day1:Number,
-  //   month1:Number,
-  //   year1:Number,
-  //   day2:Number,
-  //   month2:Number,
-  //   year2:Number
-  //  }
-  
+   name=localStorage.getItem('user')
+   selected : string
+   profilename =[]
   constructor(private calendar : NgbCalendar,
     private auth:AuthserviceService) { }
 
@@ -31,6 +25,12 @@ export class GetitemComponent implements OnInit {
     this.list=[]
     this.sorteddata=[]
     this.show=false;
+    this.selected=""
+    this.auth.getprofiles(this.name).subscribe(res=>{
+      // console.log(res.length);
+       this.profilename=JSON.parse(JSON.stringify(res));
+     });
+
   }
  slectToday(){
    this.modelfrom=this.calendar.getToday();
@@ -44,6 +44,8 @@ export class GetitemComponent implements OnInit {
 
   this.modelto=this.calendar.getNext(this.modelto)
     const data={
+      name : this.name,
+      profile : this.selected,
     day1:this.modelfrom.day,
     month1:this.modelfrom.month,
     year1:this.modelfrom.year,
@@ -52,7 +54,7 @@ export class GetitemComponent implements OnInit {
     year2:this.modelto.year
    }
    
-   if(data.year1>data.year2||data.day1===undefined||data.day2===undefined||data.month1===undefined||data.month2===undefined||data.year1===undefined||data.year2===undefined)
+   if(data.year1>data.year2||data.day1===undefined||data.day2===undefined||data.month1===undefined||data.month2===undefined||data.year1===undefined||data.year2===undefined||this.selected==='')
    alert("setProperdate")
    else if((data.year1===data.year2)&&(data.month1>data.month2))
    alert("setproperdate")

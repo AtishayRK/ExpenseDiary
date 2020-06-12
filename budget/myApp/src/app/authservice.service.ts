@@ -52,4 +52,19 @@ this.router.navigate(['/login']);
         
       return this.http.get<any>("http://localhost:4000/apis/getitem"+"?myobj="+encodeURIComponent(obj));
     }
+    addprofile(data){
+     
+    //  console.log(data)
+      return this.http.post<any>("http://localhost:4000/apis/profiles",data);
+    }
+    getprofiles(name)
+    {
+    //  console.log(name)
+      return this.http.get<any>("http://localhost:4000/apis/getprofiles/"+name);
+    }
+    deleteprofile(data)
+    {
+      var profile=JSON.stringify(data)
+      return this.http.delete<any>("http://localhost:4000/apis/deleteProfile"+"?profile="+encodeURIComponent(profile));
+    }
 }

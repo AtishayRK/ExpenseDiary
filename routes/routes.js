@@ -59,31 +59,16 @@ router.post('/register',(req,res,next)=>{
             }
         });
     });
-router.post('/item',verifyToken,(req,res)=>{
-    const date=new Date();
-    
-    const daten=new Date(date.getFullYear(), date.getMonth()+1,date.getDate()+1);
-    console.log(daten)
-const newItem =new item({
-    item : req.body.item,
-    amt : req.body.amt,
-    date : daten
-})
 
-newItem.save((err,result)=>{
-    if(err)
-    res.json({"err":"err in save"});
-    else
-    res.json({"res" : "save complete"});
-})
-})
 router.post('/insert',verifyToken,(req,res)=>{
     const date=new Date( req.body.year,req.body.month,req.body.day+1);
     console.log(date);
 const newItem =new item({
     item : req.body.item,
     amt : req.body.amt,
-    date : date
+    date : date,
+    profile : req.body.profile,
+    name : req.body.name
 })
 newItem.save((err,result)=>{
     if(err)
@@ -100,14 +85,13 @@ router.get('/getitem',(req,res)=>{
    var obj=JSON.parse(req.query.myobj)
    var date1=new Date(obj.year1,obj.month1,obj.day1);
    var date2=new Date(obj.year2,obj.month2,obj.day2);
-   var date3=new Date()
-   
-
-  
-   item.find({date:{ $lte : date2,$gt : date1}},(err,result)=>{
+    var name = obj.name
+    var profile =obj.profile
+  item.find({$and : [{name: name},{date:{ $lte : date2,$gt : date1}},{profile : profile}]},(err,result)=>{
 
     if(err)
       res.status(404).json({"msg":"err in search"});
+      //console.log(result)
       result.forEach((p)=>{
             files[count++]={
                 item : p.item,
@@ -126,8 +110,10 @@ router.get('/getitem',(req,res)=>{
 router.post('/profiles',(req,res)=>{
     profile.find({name : req.body.name},(err,result)=>{
         if(err)
-        res.json({"err" : "not added"});
-          
+     {    
+         console.log("not added");
+            res.json({"err" : "not added"});
+    }    
         if(result.length===0)
         {
             let newProfile=new profile({
@@ -136,9 +122,15 @@ router.post('/profiles',(req,res)=>{
             })
             newProfile.save((err,ans)=>{
                 if(err)
-                res.json("err in save")
+                {    
+                    console.log("not added");
+                       res.json({"err" : "not added"});
+               }   
                 else
-                res.json({"res":"saved"})
+                {    
+                    console.log(" added");
+                       res.json({"res" : "added"});
+               }   
             })
         }
         else{
@@ -146,46 +138,60 @@ router.post('/profiles',(req,res)=>{
                 {name : req.body.name},
                 {$addToSet : {profiles : req.body.profile}},(err,result)=>{
                     if(err)
-                    res.json("err in save")
-                    else
-                    res.json({"res":"saved"})
+                {    
+                    console.log("not upated");
+                       res.json({"err" : "not upated"});
+               }   
+                else
+                {    
+                    console.log(" updated");
+                       res.json({"res" : "upated"});
+               }   
                 }
             )
         }
 
     })
 })
-router.get('/getprofiles',(req,res)=>{
-    let nameid=req.query.name;
+router.get('/getprofiles/:name',(req,res)=>{
+    let nameid=req.params.name;
+  //  console.log(nameid+"  jsdn")
     let list=[]
     let con=0;
-    profile.findOne({name: nameId},(err,result)=>{
+    profile.findOne({name: nameid},(err,result)=>{
         if(err)
-         res.json({err:"erron in search"})
-
-         result.forEach((item)=>{
-             list=item.profiles
-         })
+         console.log("erron in search")
+         
+        // console.log(result)
+         if(result) 
+         {
+            
+            {
+             list=result.profiles
+         }
+        }
          res.json(list);
-    })
+        }
+    )
 })
-  router.delete('/deleteProfile/:profile',(req,res)=>{
-      let data=JSON.parse(req.params.profile);
+  router.delete('/deleteProfile',(req,res)=>{
+      let data=JSON.parse(req.query.profile);
       let names=data.name
-      let profilename=data.
+      let profilename=data.profilename
       profile.update(
           {name: names},
           {
               $pull :{ profiles : profilename }
           },
-          (err,res)=>{
+          (err,result)=>{
             if(err)
-            res.json("err in delete");
+            console.log("err in delete");
             else
-            res.json({"res":"deleted"})
+            console.log("deleted")
 
           }
       )
+      res.json({msg:"deleted"})
   })
 
 module.exports=router;

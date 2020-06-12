@@ -13,6 +13,8 @@ const schema=mongoose.Schema({
     },
      date : {
          type : Date
-     }
+     },
+    profile : String,
+    name : String
 })
 module.exports=mongoose.model('budgetItem',schema);

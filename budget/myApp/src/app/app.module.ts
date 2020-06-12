@@ -6,7 +6,7 @@ import {CustomFormsModule,CustomValidators} from 'ng2-validation'
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { ItemComponent } from './item/item.component';
+
 import { InsertItemComponent } from './insert-item/insert-item.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthserviceService } from './authservice.service';
@@ -14,13 +14,13 @@ import { AuthguardService } from './authguard.service';
 import { TokeninterceptorService } from './tokeninterceptor.service';
 import { GetitemComponent } from './getitem/getitem.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { ProfilesComponent } from './profiles/profiles.component'
+import { ProfilesComponent } from './profiles/profiles.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    ItemComponent,
     InsertItemComponent,
     GetitemComponent,
     ProfilesComponent
@@ -32,7 +32,8 @@ import { ProfilesComponent } from './profiles/profiles.component'
     HttpClientModule,
     ReactiveFormsModule,
     CustomFormsModule,
-    NgbModule
+    NgbModule,
+    BrowserAnimationsModule
 
   ],
   providers: [AuthserviceService,AuthguardService,
