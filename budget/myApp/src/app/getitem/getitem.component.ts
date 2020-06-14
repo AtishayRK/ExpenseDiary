@@ -62,7 +62,7 @@ export class GetitemComponent implements OnInit {
    alert("setproperdate")
   this.auth.getItem(data).subscribe(
     res=>{
-       
+       this.total=0;
       if(res.length===0)
       this.show=false;
        else
