@@ -15,7 +15,8 @@ import { TokeninterceptorService } from './tokeninterceptor.service';
 import { GetitemComponent } from './getitem/getitem.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { ProfilesComponent } from './profiles/profiles.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SetComponent } from './set/set.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +24,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
     RegisterComponent,
     InsertItemComponent,
     GetitemComponent,
-    ProfilesComponent
+    ProfilesComponent,
+    SetComponent
   ],
   imports: [
     BrowserModule,

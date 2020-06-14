@@ -5,6 +5,7 @@ const jwt=require("jsonwebtoken");
 const md5=require('md5');
 const user=require("../models/user");
 const profile= require('../models/profiles')
+const set=require('../models/set');
 var async=require("async")
 function verifyToken(req,res,next){
     if(!req.headers.authorization)
@@ -194,4 +195,78 @@ router.get('/getprofiles/:name',(req,res)=>{
       res.json({msg:"deleted"})
   })
 
+  router.get('/getbudget/:name',(req,res)=>{
+  
+    const name=req.params.name;
+    set.find({name : name},(err,result)=>{
+        if(err)
+        console.log(err);
+        else{
+            if(result===null||result.length===0)
+            {
+                res.json();
+            }
+            else{
+               
+                res.json({budget: result[0].budget,
+                          warn : result[0].warn});
+            }
+        }
+    })
+
+  })
+  router.post('/setbudget',(req,res)=>{
+   
+        name=req.body.name
+        budget=req.body.budget
+        warn =req.body.warn
+        set.find({name:name},(err,result)=>
+        {
+        if(err)
+        {    
+            console.log("not added");
+               res.json({"err" : "not added"});
+       }    
+           if(result.length===0)
+           {
+               let newitem=new set({
+                   name : name,
+                   budget : budget,
+                   warn : warn
+               })
+               newitem.save((err,ans)=>{
+                   if(err)
+                   {    
+                       console.log("not added");
+                          res.json({"err" : "not added"});
+                  }   
+                   else
+                   {    
+                       console.log(" added");
+                          res.json({"res" : "added"});
+                  }   
+               })
+           }
+           else{
+               set.update(
+                   {name : req.body.name},
+                   {$set : {budget : budget,warn : warn}},(err,result)=>{
+                       if(err)
+                   {    
+                       console.log("not upated");
+                          res.json({"err" : "not upated"});
+                  }   
+                   else
+                   {    
+                       console.log(" updated");
+                          res.json({"res" : "upated"});
+                  }   
+                   }
+               )
+           }
+   
+       })
+
+   
+  })
 module.exports=router;

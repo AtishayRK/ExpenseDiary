@@ -7,6 +7,7 @@ import { AuthguardService } from './authguard.service';
 import { InsertItemComponent } from './insert-item/insert-item.component';
 import { GetitemComponent } from './getitem/getitem.component';
 import { ProfilesComponent } from './profiles/profiles.component';
+import { SetComponent } from './set/set.component';
 
 
 const routes: Routes = [
@@ -35,6 +36,11 @@ const routes: Routes = [
   },{
     path :'getitem',
     component: GetitemComponent,
+    canActivate :[AuthguardService]
+  },
+  {
+    path :'set',
+    component: SetComponent,
     canActivate :[AuthguardService]
   }
 

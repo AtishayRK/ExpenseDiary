@@ -67,4 +67,12 @@ this.router.navigate(['/login']);
       var profile=JSON.stringify(data)
       return this.http.delete<any>("http://localhost:4000/apis/deleteProfile"+"?profile="+encodeURIComponent(profile));
     }
+    getbudget(name)
+    {
+      return this.http.get<any>("http://localhost:4000/apis/getbudget/"+name);
+    }
+    setbudget(data)
+    {
+      return this.http.post<any>("http://localhost:4000/apis/setbudget",data);
+    }
 }

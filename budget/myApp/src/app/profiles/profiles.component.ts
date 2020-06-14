@@ -12,13 +12,19 @@ export class ProfilesComponent implements OnInit {
   closeResult = '';
   nameOfprofile : string
   name=localStorage.getItem('user')
- 
+  budget : number
+  bud : string
+  tot : any
   profilename=[]
   constructor(private modalService: NgbModal,
     private auth: AuthserviceService,private router : Router) {}
 
   ngOnInit() : void{
   //  console.log(this.name)
+  this.bud= localStorage.getItem(this.name)
+  this.tot=this.bud.split(" ");
+  this.budget=parseInt(this.tot[0],10)
+  
 this.auth.getprofiles(this.name).subscribe(res=>{
  // console.log(res.length);
   this.profilename=JSON.parse(JSON.stringify(res));

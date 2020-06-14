@@ -25,6 +25,7 @@ loginUser(){
     res=>{
        console.log(res)
        localStorage.setItem('token',res.token)
+       
        this.router.navigate(['/profiles']);
        localStorage.setItem('user',this.name);
     },
